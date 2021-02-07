@@ -1,0 +1,39 @@
+/* Footer
+-------------------------------------------------- */
+main {
+  min-height: 1300px;
+  padding: 1rem;
+}
+
+/* Pagina
+-------------------------------------------------- */
+.container {
+  width: auto;
+  max-width: 1080px;
+}
+#div_botones {
+  margin-left: 270px;
+}
+#div_blanco {
+  height: 380px;
+}
+h3 {
+  font-size:22px;
+}
+@media only screen and (max-width :998px) {
+  h1 {
+  font-size:22px;
+}
+  h2 {
+  font-size:18px;
+}
+  p {
+    font-size: 14px;
+  }
+  .col-sm-4 {
+    margin:3px;
+  }
+#div_botones {
+  margin-left: 0;
+}
+}
