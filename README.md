@@ -19,6 +19,7 @@ index.js -> Lógica creada para el servidor Node.js. Procesa las peticiones y ge
  
 ## DEPENDENCIAS
 - Bootstrap para la página web.
+- Node.js para el servidor.
 - Paquetes NPM:
   - Express
   - Formidable
