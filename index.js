@@ -1,3 +1,6 @@
+/* Calculadora de excesos según el ADPC en vigor.
+    Copyright (C) 2021  H. Garabito 
+	Web publicada bajo la licencia GPLv3. https://www.gnu.org/licenses/ */
 const https = require('https')
 const fs = require('fs')
 const express = require('express')
