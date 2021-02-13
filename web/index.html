@@ -1,4 +1,7 @@
 <!doctype html>
+<!-- Calculadora de excesos según el ADPC en vigor.
+    Copyright (C) 2021  H. Garabito 
+	Web publicada bajo la licencia GPLv3. https://www.gnu.org/licenses/ -->
 <html lang="es" class="h-100">
 	<head>
 	    <meta charset="utf-8">
@@ -19,16 +22,20 @@
 			  <div class="container">
 			    <h1 class="display-4">Instrucciones:</h1>
 			    <p>Introduce las horas y la calculadora automáticamente te dará el resultado a poner en la solicitud. También tienes opción de descargar el PDF con el apartado de "notas" relleno con el resultado de los cálculos.</p>
-			    <p>En el cálculo de las horas de mayor dedicación los 30 minutos de toma y deje del turno están incluidos en el resultado. En caso de turnos de AC/SC/Pasos puros o Reserva, al marcar la casilla correspondiente se incluye en el cálculo el deje del servicio.</p>
+			    <p>En el cálculo de las horas de mayor dedicación por defecto se incluyen 15 minutos de toma, modificables en el campo correspondiente, y 15 minutos de deje. En caso de turnos de AC/SC/Pasos puros o Reserva, al marcar la casilla correspondiente se incluye en el cálculo el deje del servicio e ignora el tiempo de toma.</p>
 			    <p>Recordatorio: los viajeros (ya sean en tren o en taxi) también cuentan como exceso de jornada.</p>
 			  </div>
 			</div>
-	     	<div class="row align-items-end">
+	     	<div class="row align-items-start">
 	     		<div class="col-sm-4">
 	     			<h2>Horas de mayor dedicación</h2>
 	     			<div class="p-3 mb-2 bg-light text-dark rounded-2"><p>El tiempo que excede sobre la jornada máxima diaria de 8 horas hasta las 9 horas y 30 minutos, siempre que se inicie y finalice el servicio en residencia</p></div>
 	     			<div class="border rounded">
 		    			<form id="form_dedicacion" class="d-grid gap-2 p-1">
+		    				<div class="form-group">
+					        	<label for="inputHoraToma">Tiempo de toma grafiado:</label>
+					      		<input type="number" id="inputHoraToma" value="15" min="15" class="form-control">
+				        	</div>
 				        	<div class="form-group">
 					        	<label for="inputHoraPrimer">Hora de realización del primer tren o viajero:</label>
 					      		<input type="time" id="inputHoraPrimer" class="form-control">
@@ -119,10 +126,19 @@
   	</div>
   </main>
     <footer class="container text-center mt-auto py-3 bg-light">
-        <p class="text-muted">H. Garabito, C. Pérez - 2018, 2021</p>
+    	<div class="row justify-content-between" id="div_footer">
+    		<div class="col">
+        	    <p class="text-muted">H. Garabito, C. Pérez - 2018, 2021</p>
+        	</div>
+        	<div class="col">
+        		 <a href="https://www.gnu.org/licenses/gpl-3.0.html"><img src="images/gplv3-with-text-84x42.png" alt="GPLv3 Licensed"></a>
+        		 <a href="https://github.com/yak112/excesos/"><img src="images/GitHub-Mark-64px.png" alt="Visita la página del proyecto en GitHub"></a>
+        	</div>
+        </div>
     </footer>
     <script>
 		function calculator(option) {
+			var TiempoToma = document.getElementById("inputHoraToma").value;
 		    var HoraPrimer = document.getElementById("inputHoraPrimer").value;
 		    var HoraUltimo = document.getElementById("inputHoraUltimo").value;
 		    var HoraFin = document.getElementById("inputHoraFin").value;
@@ -131,9 +147,13 @@
 		    var HoraRealizada = document.getElementById("inputHoraRealizada").value;
 
 		    var alertaModal = new bootstrap.Modal(document.getElementById('alertaModal'), {});
-
+		    if(isNaN(TiempoToma)) {
+		    	TiempoToma = 15; //Tiempo mínimo de toma según ADPC
+		    } else {
+		    	TiempoToma = parseInt(TiempoToma);
+		    }
 		    if(!document.getElementById('inputAC').checked) {
-				var HorasDedicacion = Math.round((diff(HoraPrimer,HoraUltimo)+30)*1.65); //30 minutos de toma y deje
+				var HorasDedicacion = Math.round((diff(HoraPrimer,HoraUltimo)+TiempoToma+15)*1.65);
 		    } else {
 		    	var HorasDedicacion = Math.round((diff(HoraPrimer,HoraUltimo)+15)*1.65);
 		    }
