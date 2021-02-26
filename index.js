@@ -13,8 +13,8 @@ const path = require('path')
 const { round, floor, add } = require('mathjs')
 
 const httpsOptions = {
-    key: fs.readFileSync('./conf/AvisosRodalies.key'),
-    cert: fs.readFileSync('./conf/AvisosRodalies.pem')
+    key: fs.readFileSync('cert.key'),
+    cert: fs.readFileSync('cert.pem')
 }
 const sourcePDF = "./web/files/plantilla.pdf";
 
