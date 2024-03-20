@@ -23,8 +23,10 @@ index.js -> Lógica creada para el servidor Node.js. Procesa las peticiones y ge
 - Paquetes NPM:
   - Express
   - Formidable
-  - pdfFiller
+  - mathjs
+  - @sparticuz/pdffiller
   - @supercharge/strings
+  - winston
   
   
 ### Proyecto publicado bajo licencia GPLv3
